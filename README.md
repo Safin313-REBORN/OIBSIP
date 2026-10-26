@@ -133,7 +133,7 @@ During this internship program, I developed production-grade frontend applicatio
 - TaskFlow Pro (Daily Planner & To-Do Suite with LocalStorage)
 - NexusShield (Client Authentication with SHA-256 Web Crypto Hashing)
 
-🔗 GitHub Repository: https://github.com/Safin313-REBORN/OIBSIP_task
+🔗 GitHub Repository: https://github.com/Safin313-REBORN/OIBSIP
 
 A heartfelt thanks to @Oasis Infobyte for this incredible learning opportunity!
 
