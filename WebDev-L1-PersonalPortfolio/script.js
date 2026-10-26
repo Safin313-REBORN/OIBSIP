@@ -1,5 +1,5 @@
 /**
- * Safin Ahmed — Portfolio Interactive Controller
+ * Saharia Hassan Safin — Portfolio Interactive Controller
  * Oasis Infobyte SIP — Level 1 Task 2: Personal Portfolio
  */
 

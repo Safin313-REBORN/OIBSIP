@@ -7,7 +7,7 @@ Welcome to my official **Oasis Infobyte SIP** submission repository. This reposi
 
 ## 📌 Repository Overview
 
-- **Intern Name:** Safin Ahmed
+- **Intern Name:** Saharia Hassan Safin
 - **Internship Domain:** Web Development & Designing (Frontend)
 - **Repository Name:** `OIBSIP` *(Exact format required by Oasis Infobyte)*
 - **Completion Level:** **Level 1 (All 3 Tasks)** + **Level 2 (All 4 Tasks)** — *Total 7 Projects Delivered*
@@ -133,7 +133,7 @@ During this internship program, I developed production-grade frontend applicatio
 - TaskFlow Pro (Daily Planner & To-Do Suite with LocalStorage)
 - NexusShield (Client Authentication with SHA-256 Web Crypto Hashing)
 
-🔗 GitHub Repository: [Insert your public OIBSIP repo URL]
+🔗 GitHub Repository: https://github.com/Safin313-REBORN/OIBSIP_task
 
 A heartfelt thanks to @Oasis Infobyte for this incredible learning opportunity!
 

@@ -1,7 +1,7 @@
 # Oasis Infobyte SIP — Web Development & Designing
 ## Level 1 · Task 2: Personal Portfolio Website
 
-**Project Name:** Safin Ahmed — Developer Portfolio & Digital Résumé  
+**Project Name:** Saharia Hassan Safin — Developer Portfolio & Digital Résumé  
 **Directory:** `OIBSIP/WebDev-L1-PersonalPortfolio/`  
 **Track:** Web Development & Designing  
 **Tech Stack:** HTML5, CSS3 (Modern Flexbox & Grid, CSS Custom Properties), Vanilla JavaScript  
@@ -14,7 +14,7 @@ An ultra-sleek, responsive personal portfolio website engineered to showcase tec
 ---
 
 ### ✨ Feature Checklist (As per Oasis Infobyte Specification)
-- [x] **Profile / Hero Section**: Developer name ("Safin Ahmed"), role title ("Frontend Engineer & Creative Technologist"), animated availability indicator, social profiles (GitHub, LinkedIn, Email), and an illustrated developer silhouette avatar card.
+- [x] **Profile / Hero Section**: Developer name ("Saharia Hassan Safin"), role title ("Frontend Engineer & Creative Technologist"), animated availability indicator, social profiles (GitHub, LinkedIn, Email), and an illustrated developer silhouette avatar card.
 - [x] **About Me Section**: Comprehensive 3-paragraph career narrative detailing web engineering ethos, design philosophy, and core focus areas (Pixel-Perfect, Zero-Jank, Accessible).
 - [x] **Skills Section**: Visual interactive grid with category tabs (*All, Frontend Core, Frameworks & Tools, Design*), individual percentage meters, and descriptive summaries.
 - [x] **Projects Section**: 4 detailed project showcase cards (AetherMind AI, TempSphere Pro, OmniCalc Studio, TaskFlow Pro) complete with tech tags, descriptions, live demo links, and GitHub repository links.
