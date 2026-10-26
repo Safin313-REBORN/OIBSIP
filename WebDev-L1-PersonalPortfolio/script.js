@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navItems = document.querySelectorAll('.nav-item');
 
   function updateNavScrollspy() {
-    const scrollPos = window.pageYOffset + 120;
+    const scrollPos = window.scrollY + 120;
     sections.forEach(sec => {
       const top = sec.offsetTop;
       const height = sec.offsetHeight;
@@ -113,6 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!name || !email || !subject || !message) {
         showToast('⚠️ Please fill out all required fields.');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast('⚠️ Please enter a valid email address format.');
         return;
       }
 

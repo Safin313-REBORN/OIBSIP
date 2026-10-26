@@ -52,31 +52,88 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Brute Force Protection Tracking
   let failedAttempts = 0;
   let isLockedOut = false;
+  let lockoutInterval = null;
 
-  // 1. Password Hashing Utility (SHA-256 via Web Crypto API)
-  async function sha256(plainText) {
+  // 1. Password Hashing Utility (Salted SHA-256 via Web Crypto API)
+  function generateSalt() {
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    return Array.from(array, b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function sha256(plainText, salt = '') {
     const encoder = new TextEncoder();
-    const data = encoder.encode(plainText);
+    const data = encoder.encode(salt + plainText);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  // 2. Initialize Seed Accounts in LocalStorage if Empty
+  // 2. Persistent Lockout Cooldown Checker (Prevents Page Reload Bypass)
+  function checkPersistentLockout() {
+    const lockoutUntil = parseInt(localStorage.getItem('nexus_lockout_until') || '0', 10);
+    const now = Date.now();
+    if (now < lockoutUntil) {
+      const remainingSec = Math.ceil((lockoutUntil - now) / 1000);
+      isLockedOut = true;
+      startLockoutCountdown(remainingSec);
+      return true;
+    } else {
+      isLockedOut = false;
+      localStorage.removeItem('nexus_lockout_until');
+      return false;
+    }
+  }
+
+  function startLockoutCountdown(seconds) {
+    if (lockoutInterval) clearInterval(lockoutInterval);
+    let countdown = seconds;
+    const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+    if (loginSubmitBtn) loginSubmitBtn.disabled = true;
+    showAlert(`⚠️ Too many failed attempts. Login locked for ${countdown}s.`, 'error');
+
+    lockoutInterval = setInterval(() => {
+      countdown--;
+      if (countdown <= 0) {
+        clearInterval(lockoutInterval);
+        lockoutInterval = null;
+        isLockedOut = false;
+        failedAttempts = 0;
+        if (loginSubmitBtn) loginSubmitBtn.disabled = false;
+        localStorage.removeItem('nexus_lockout_until');
+        clearAlert();
+        showToast('Login unlocked. You may try again.');
+      } else {
+        showAlert(`⚠️ Too many failed attempts. Login locked for ${countdown}s.`, 'error');
+      }
+    }, 1000);
+  }
+
+  function lockoutUser() {
+    isLockedOut = true;
+    const cooldownMs = 30000;
+    localStorage.setItem('nexus_lockout_until', String(Date.now() + cooldownMs));
+    startLockoutCountdown(30);
+  }
+
+  // 3. Initialize Seed Accounts in LocalStorage if Empty
   let registeredUsers = JSON.parse(localStorage.getItem('nexus_registered_users') || '[]');
-  if (registeredUsers.length === 0) {
-    const defaultPasswordHash = await sha256('DemoPass123!');
-    registeredUsers.push({
+  if (registeredUsers.length === 0 || !registeredUsers[0].salt) {
+    const defaultSalt = generateSalt();
+    const defaultPasswordHash = await sha256('DemoPass123!', defaultSalt);
+    registeredUsers = [{
       fullName: 'Alex Morgan',
       username: 'alex_dev',
       email: 'alex@company.com',
+      salt: defaultSalt,
       passwordHash: defaultPasswordHash,
       registeredAt: new Date().toLocaleDateString()
-    });
+    }];
     localStorage.setItem('nexus_registered_users', JSON.stringify(registeredUsers));
   }
 
-  // 3. Check Active Session on Page Load (Protected Route)
+  // 4. Check Active Session on Page Load (Protected Route) & Persistent Lockout
+  checkPersistentLockout();
   checkSession();
 
   function checkSession() {
@@ -228,13 +285,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    // Cryptographic Hash Password
-    const passwordHash = await sha256(password);
+    // Cryptographic Hash Password with Unique Salt
+    const salt = generateSalt();
+    const passwordHash = await sha256(password, salt);
 
     const newUser = {
       fullName,
       username,
       email,
+      salt,
       passwordHash,
       registeredAt: new Date().toLocaleDateString()
     };
@@ -258,7 +317,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     e.preventDefault();
     clearAlert();
 
-    if (isLockedOut) {
+    if (checkPersistentLockout() || isLockedOut) {
       showAlert('Too many failed attempts. Account temporarily locked for security.', 'error');
       return;
     }
@@ -267,20 +326,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     const password = loginPassword.value;
 
     registeredUsers = JSON.parse(localStorage.getItem('nexus_registered_users') || '[]');
-    const inputHash = await sha256(password);
+    const targetUser = registeredUsers.find(u => u.username === identifier || u.email === identifier);
 
-    // Secure search: generic failure without leaking user existence
-    const matchedUser = registeredUsers.find(u =>
-      (u.username === identifier || u.email === identifier) && u.passwordHash === inputHash
-    );
+    let matchedUser = null;
+    if (targetUser) {
+      const inputHash = await sha256(password, targetUser.salt || '');
+      if (inputHash === targetUser.passwordHash) {
+        matchedUser = targetUser;
+      }
+    }
 
     if (matchedUser) {
       failedAttempts = 0;
+      localStorage.removeItem('nexus_lockout_until');
+
+      // Create cryptographically secure session ID (CSPRNG)
+      const sessionId = typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : 'sess_' + Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
 
       // Create session payload
       const sessionToken = {
         username: matchedUser.username,
-        sessionId: 'sess_' + Math.random().toString(36).substring(2, 10),
+        sessionId: sessionId,
         loginTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         date: new Date().toLocaleDateString()
       };
@@ -304,25 +372,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
   });
-
-  function lockoutUser() {
-    isLockedOut = true;
-    let countdown = 30;
-    showAlert(`⚠️ Too many failed attempts. Login locked for ${countdown}s.`, 'error');
-
-    const timer = setInterval(() => {
-      countdown--;
-      if (countdown <= 0) {
-        clearInterval(timer);
-        isLockedOut = false;
-        failedAttempts = 0;
-        clearAlert();
-        showToast('Login unlocked. You may try again.');
-      } else {
-        showAlert(`⚠️ Too many failed attempts. Login locked for ${countdown}s.`, 'error');
-      }
-    }, 1000);
-  }
 
   // 8. Render Protected Dashboard
   function renderDashboard(user, session) {

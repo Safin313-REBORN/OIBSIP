@@ -224,6 +224,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function formatTemp(num) {
+    if (!Number.isFinite(num)) {
+      return 'Overflow';
+    }
     if (Math.abs(num) >= 1e6 || (Math.abs(num) < 0.01 && num !== 0)) {
       return num.toExponential(2);
     }

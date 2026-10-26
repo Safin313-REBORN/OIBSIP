@@ -329,8 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. Safe Custom Math Evaluator (NO eval)
   // Tokenizes expression into numbers & operators, then uses Shunting-Yard algorithm
   function safeCalculate(rawExpr) {
-    // Normalize operator symbols
+    // Normalize operator symbols and whitespace
     let expr = rawExpr
+      .replace(/\s+/g, '')
       .replace(/×/g, '*')
       .replace(/÷/g, '/')
       .replace(/−/g, '-');

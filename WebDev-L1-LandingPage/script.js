@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelectorAll('.nav-link');
 
   function updateActiveNav() {
-    const scrollY = window.pageYOffset;
+    const scrollY = window.scrollY;
     sections.forEach(current => {
       const sectionHeight = current.offsetHeight;
       const sectionTop = current.offsetTop - 120;
@@ -77,16 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function animateNumber(element, start, end, duration) {
-    if (start === end) return;
+    if (element._animTimer) {
+      clearInterval(element._animTimer);
+      element._animTimer = null;
+    }
+    if (start === end) {
+      element.textContent = end;
+      return;
+    }
     const range = end - start;
     let current = start;
     const increment = end > start ? 1 : -1;
     const stepTime = Math.abs(Math.floor(duration / range));
-    const timer = setInterval(() => {
+    element._animTimer = setInterval(() => {
       current += increment;
       element.textContent = current;
       if (current === end) {
-        clearInterval(timer);
+        clearInterval(element._animTimer);
+        element._animTimer = null;
       }
     }, Math.max(stepTime, 20));
   }

@@ -193,10 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
         <div class="task-meta">
-          <span class="meta-pill p-${task.priority}">${priorityLabel}</span>
-          <span class="meta-pill c-tag">${categoryIcon} ${capitalize(task.category)}</span>
-          ${task.dueDate ? `<span class="meta-pill c-tag">📅 Due ${task.dueDate}</span>` : ''}
-          <span class="time-tag">${task.completed ? `✓ Done ${task.completedAt || ''}` : `Added ${task.createdAt}`}</span>
+          <span class="meta-pill p-${escapeHtml(task.priority)}">${escapeHtml(priorityLabel)}</span>
+          <span class="meta-pill c-tag">${categoryIcon} ${escapeHtml(capitalize(task.category))}</span>
+          ${task.dueDate ? `<span class="meta-pill c-tag">📅 Due ${escapeHtml(task.dueDate)}</span>` : ''}
+          <span class="time-tag">${task.completed ? `✓ Done ${escapeHtml(task.completedAt || '')}` : `Added ${escapeHtml(task.createdAt)}`}</span>
         </div>
       </div>
     `;

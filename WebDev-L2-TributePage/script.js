@@ -40,26 +40,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 250);
   }
 
+  let autoRotateTimer = null;
+  function restartAutoRotate() {
+    if (autoRotateTimer) clearInterval(autoRotateTimer);
+    autoRotateTimer = setInterval(() => {
+      currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+      updateQuote(currentQuoteIndex);
+    }, 8000);
+  }
+
   nextQuoteBtn.addEventListener('click', () => {
     currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
     updateQuote(currentQuoteIndex);
+    restartAutoRotate();
   });
 
   prevQuoteBtn.addEventListener('click', () => {
     currentQuoteIndex = (currentQuoteIndex - 1 + quotes.length) % quotes.length;
     updateQuote(currentQuoteIndex);
+    restartAutoRotate();
   });
 
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
       currentQuoteIndex = parseInt(dot.dataset.index, 10);
       updateQuote(currentQuoteIndex);
+      restartAutoRotate();
     });
   });
 
-  // Auto rotate quotes every 8 seconds
-  setInterval(() => {
-    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-    updateQuote(currentQuoteIndex);
-  }, 8000);
+  // Start initial rotation
+  restartAutoRotate();
 });
