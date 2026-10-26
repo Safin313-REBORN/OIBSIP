@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TempSphere Pro — Precision Temperature Converter & Thermal Visualizer</title>
+  <meta name="description" content="Convert between Celsius, Fahrenheit, Kelvin, and Rankine with live visual thermometer simulation and absolute zero guardrails.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Thermal Glows -->
+  <div class="thermal-glow" id="thermalGlow"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <div class="brand">
+        <span class="brand-icon">🌡️</span>
+        <div>
+          <h1 class="brand-title">TempSphere <span class="badge-pro">PRO</span></h1>
+          <p class="brand-sub">Precision Thermal Instrumentation & Converter</p>
+        </div>
+      </div>
+      <div class="header-tools">
+        <button class="tool-btn" id="soundToggleBtn" aria-label="Toggle sound feedback">
+          <span id="soundIcon">🔊</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div class="converter-dashboard">
+      <!-- Left Column: Input & Controls -->
+      <div class="panel-left">
+        <!-- Quick Scientific Presets -->
+        <div class="card presets-card">
+          <span class="card-tag">QUICK BENCHMARKS</span>
+          <div class="presets-row">
+            <button class="preset-pill" data-val="-273.15" data-unit="C">❄️ Abs. Zero (0 K)</button>
+            <button class="preset-pill" data-val="0" data-unit="C">🧊 Freezing (0 °C)</button>
+            <button class="preset-pill" data-val="21" data-unit="C">🛋️ Room Temp (21 °C)</button>
+            <button class="preset-pill" data-val="37" data-unit="C">❤️ Human Body (37 °C)</button>
+            <button class="preset-pill" data-val="100" data-unit="C">♨️ Boiling (100 °C)</button>
+          </div>
+        </div>
+
+        <!-- Main Input Card -->
+        <div class="card input-card">
+          <div class="input-card-header">
+            <span class="card-tag">INPUT PARAMETERS</span>
+            <div class="live-toggle-wrap">
+              <label for="liveModeCheckbox" class="live-label">Auto Convert</label>
+              <input type="checkbox" id="liveModeCheckbox" checked>
+            </div>
+          </div>
+
+          <!-- Numeric Input Field -->
+          <div class="form-group">
+            <label for="tempInput" class="field-label">Enter Temperature Value</label>
+            <div class="input-field-wrap">
+              <input type="text" id="tempInput" placeholder="e.g. 25" value="25" autocomplete="off" aria-describedby="inputError">
+              <span class="input-clear" id="inputClearBtn" title="Clear input">&times;</span>
+            </div>
+            <div class="input-error" id="inputError" role="alert"></div>
+          </div>
+
+          <!-- Unit Selector -->
+          <div class="form-group">
+            <label class="field-label">Select Source Unit</label>
+            <div class="unit-selector-grid" role="radiogroup" aria-label="Source temperature unit">
+              <button type="button" class="unit-btn active" data-unit="C" role="radio" aria-checked="true">
+                <span class="unit-symbol">°C</span>
+                <span class="unit-name">Celsius</span>
+              </button>
+              <button type="button" class="unit-btn" data-unit="F" role="radio" aria-checked="false">
+                <span class="unit-symbol">°F</span>
+                <span class="unit-name">Fahrenheit</span>
+              </button>
+              <button type="button" class="unit-btn" data-unit="K" role="radio" aria-checked="false">
+                <span class="unit-symbol">K</span>
+                <span class="unit-name">Kelvin</span>
+              </button>
+              <button type="button" class="unit-btn" data-unit="R" role="radio" aria-checked="false">
+                <span class="unit-symbol">°R</span>
+                <span class="unit-name">Rankine</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons-row">
+            <button class="btn btn-primary btn-block" id="convertBtn">
+              <span>Convert Now</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button class="btn btn-secondary" id="resetBtn" title="Reset to default">Reset</button>
+          </div>
+
+          <!-- Absolute Zero Alert Banner -->
+          <div class="abs-zero-alert" id="absZeroAlert" role="alert">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-text">
+              <strong>Physics Violation Detected!</strong>
+              <p>The entered temperature is below Absolute Zero (<span id="absZeroLimitText">-273.15 °C</span>). All thermodynamic molecular motion ceases at 0 Kelvin. Temperatures below this value cannot exist in the physical universe.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversion Formula Breakdown Card -->
+        <div class="card formula-card">
+          <span class="card-tag">MATHEMATICAL DERIVATION</span>
+          <div class="formula-box" id="formulaBox">
+            <code>(25°C × 9/5) + 32 = 77.00°F</code>
+          </div>
+          <p class="formula-desc" id="formulaDesc">
+            Standard ISO thermodynamic conversion formula applied.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Visual Thermometer & Results -->
+      <div class="panel-right">
+        <!-- Thermal State Status Card -->
+        <div class="card status-banner-card">
+          <div class="status-indicator-wrap">
+            <span class="status-emoji" id="stateEmoji">🛋️</span>
+            <div>
+              <span class="card-tag">THERMAL CLASSIFICATION</span>
+              <h2 class="state-title" id="stateTitle">Room Temperature</h2>
+              <p class="state-desc" id="stateDesc">Comfortable human ambient thermal range (18°C – 25°C).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thermometer Visualization + Results Grid -->
+        <div class="visualizer-wrapper">
+          <!-- Animated Thermometer Tube -->
+          <div class="thermometer-card">
+            <div class="thermometer-glass">
+              <div class="stem">
+                <div class="mercury-fill" id="mercuryFill"></div>
+                <div class="ticks-col">
+                  <span>100°C</span>
+                  <span>75°C</span>
+                  <span>50°C</span>
+                  <span>25°C</span>
+                  <span>0°C</span>
+                  <span>-50°C</span>
+                </div>
+              </div>
+              <div class="bulb" id="bulb"></div>
+            </div>
+            <span class="thermo-label">Live Visual</span>
+          </div>
+
+          <!-- Multi-Unit Results Column -->
+          <div class="results-column">
+            <!-- Celsius Result -->
+            <div class="result-tile" id="tileC">
+              <div class="result-header">
+                <span class="r-unit">CELSIUS</span>
+                <button class="copy-btn" data-copy="valC" title="Copy value">📋</button>
+              </div>
+              <div class="result-val-wrap">
+                <span class="r-val" id="valC">25.00</span>
+                <span class="r-symbol">°C</span>
+              </div>
+            </div>
+
+            <!-- Fahrenheit Result -->
+            <div class="result-tile" id="tileF">
+              <div class="result-header">
+                <span class="r-unit">FAHRENHEIT</span>
+                <button class="copy-btn" data-copy="valF" title="Copy value">📋</button>
+              </div>
+              <div class="result-val-wrap">
+                <span class="r-val" id="valF">77.00</span>
+                <span class="r-symbol">°F</span>
+              </div>
+            </div>
+
+            <!-- Kelvin Result -->
+            <div class="result-tile" id="tileK">
+              <div class="result-header">
+                <span class="r-unit">KELVIN</span>
+                <button class="copy-btn" data-copy="valK" title="Copy value">📋</button>
+              </div>
+              <div class="result-val-wrap">
+                <span class="r-val" id="valK">298.15</span>
+                <span class="r-symbol">K</span>
+              </div>
+            </div>
+
+            <!-- Rankine Result -->
+            <div class="result-tile" id="tileR">
+              <div class="result-header">
+                <span class="r-unit">RANKINE</span>
+                <button class="copy-btn" data-copy="valR" title="Copy value">📋</button>
+              </div>
+              <div class="result-val-wrap">
+                <span class="r-val" id="valR">536.67</span>
+                <span class="r-symbol">°R</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conversion History Card -->
+        <div class="card history-card">
+          <div class="history-header">
+            <span class="card-tag">SESSION HISTORY</span>
+            <button class="clear-history-btn" id="clearHistoryBtn">Clear</button>
+          </div>
+          <div class="history-list" id="historyList">
+            <div class="history-empty">No conversions logged yet.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container footer-row">
+      <span>TempSphere Pro · Oasis Infobyte SIP (Level 1 Task 3)</span>
+      <span>Engineered with HTML5, CSS3, Vanilla JS</span>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

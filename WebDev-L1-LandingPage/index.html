@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AetherMind AI — Next-Generation Autonomous Neural Canvas</title>
+  <meta name="description" content="Orchestrate multi-model reasoning, autonomous code generation, and generative workflows on an infinite canvas with AetherMind AI.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="#hero" class="brand-logo">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 2 7 12 12 22 7 12 2" fill="url(#brandGradient)"/>
+            <polyline points="2 17 12 22 22 17"/>
+            <polyline points="2 12 12 17 22 12"/>
+            <defs>
+              <linearGradient id="brandGradient" x1="2" y1="2" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#8b5cf6"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">Aether<span class="gradient-text">Mind</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-menu" id="navMenu">
+        <ul class="nav-list">
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#demo" class="nav-link">Platform Demo</a></li>
+          <li><a href="#pricing" class="nav-link">Pricing</a></li>
+          <li><a href="#testimonials" class="nav-link">Wall of Love</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#pricing" class="btn btn-ghost hide-mobile">Sign In</a>
+        <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        <!-- Live Release Badge -->
+        <div class="release-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-tag">Aether 3.2 Live</span>
+          <span class="badge-text">Autonomous Multi-Agent Swarms are here</span>
+          <span class="badge-arrow">→</span>
+        </div>
+
+        <h1 class="hero-title">
+          Architect the Future of Software with <span class="gradient-text">Autonomous AI Swarms</span>
+        </h1>
+        <p class="hero-subtitle">
+          Unleash synchronized AI agent swarms to analyze, design, write, and verify complex applications in seconds. From napkin sketch to resilient production code.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-cta-group">
+          <a href="#pricing" class="btn btn-primary btn-lg glow-effect">
+            <span>Launch Free Studio</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#demo" class="btn btn-secondary btn-lg">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span>Watch 2-Min Demo</span>
+          </a>
+        </div>
+
+        <!-- Social Proof Stats -->
+        <div class="hero-metrics">
+          <div class="metric-item">
+            <span class="metric-number">99.8%</span>
+            <span class="metric-label">Precision Rate</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="metric-number">10x</span>
+            <span class="metric-label">Dev Velocity</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="metric-number">250k+</span>
+            <span class="metric-label">Active Engineers</span>
+          </div>
+          <div class="metric-divider"></div>
+          <div class="metric-item">
+            <span class="metric-number">4.9/5</span>
+            <span class="metric-label">Customer Rating</span>
+          </div>
+        </div>
+
+        <!-- Hero Preview Mockup -->
+        <div class="hero-mockup-wrapper">
+          <div class="mockup-header">
+            <div class="window-controls">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="mockup-title">aethermind-swarm-cluster // session-alpha-9</div>
+            <div class="mockup-status"><span class="pulse-indicator"></span> 3 Agents Active</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-sidebar">
+              <div class="sidebar-agent active">
+                <span class="agent-avatar">🤖</span>
+                <div class="agent-info">
+                  <strong>Architect-Agent</strong>
+                  <small>Synthesizing schema...</small>
+                </div>
+              </div>
+              <div class="sidebar-agent">
+                <span class="agent-avatar">⚡</span>
+                <div class="agent-info">
+                  <strong>Coder-Alpha</strong>
+                  <small>Writing TypeScript APIs</small>
+                </div>
+              </div>
+              <div class="sidebar-agent">
+                <span class="agent-avatar">🛡️</span>
+                <div class="agent-info">
+                  <strong>Auditor-Bot</strong>
+                  <small>Running AST security scan</small>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-editor">
+              <pre><code><span class="code-comment">// Task: Generate resilient real-time WebSocket broker</span>
+<span class="code-keyword">import</span> { AetherSwarm, AgentPipeline } <span class="code-keyword">from</span> <span class="code-string">'@aethermind/core'</span>;
+
+<span class="code-keyword">export const</span> pipeline = <span class="code-keyword">new</span> AgentPipeline({
+  mode: <span class="code-string">'autonomous-consensus'</span>,
+  timeoutMs: <span class="code-number">1500</span>,
+  validationRules: [<span class="code-string">'ZeroDataLoss'</span>, <span class="code-string">'TypeSafeContract'</span>]
+});
+
+<span class="code-keyword">await</span> pipeline.deployCluster({ target: <span class="code-string">'edge-production'</span> });
+<span class="code-success">✓ Swarm deployment verified. Zero vulnerabilities discovered.</span></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trusted By Logos -->
+    <section class="partners-section">
+      <div class="container">
+        <p class="partners-title">POWERING NEXT-GEN ENGINEERING TEAMS WORLDWIDE</p>
+        <div class="partners-grid">
+          <span class="partner-badge">⚡ SYNTHETIX</span>
+          <span class="partner-badge">◆ HYPERION DATA</span>
+          <span class="partner-badge">▲ APEX LOGIC</span>
+          <span class="partner-badge">❖ QUANTUM EDGE</span>
+          <span class="partner-badge">● NEURAL LABS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">UNMATCHED CAPABILITY</span>
+          <h2 class="section-title">Engineered for Exponential Engineering</h2>
+          <p class="section-subtitle">Every tool, layer, and optimization carefully sculpted to help software teams create at the speed of thought.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon icon-purple">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="feature-card-title">Multi-Agent Swarm Logic</h3>
+            <p class="feature-card-desc">Deploy dedicated AI agents for product requirements, system design, frontend UI, backend APIs, and unit test suites that verify each other concurrently.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-cyan">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="feature-card-title">Sub-Millisecond Inference</h3>
+            <p class="feature-card-desc">Piped directly through edge tensor clusters with smart speculative decoding, yielding instant streaming feedback with zero perceptual lag.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-emerald">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="feature-card-title">Zero-Leak Guardrails</h3>
+            <p class="feature-card-desc">SOC2 Type II and HIPAA compliant. Your private proprietary intellectual property never enters public model training queues.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3 class="feature-card-title">Continuous Time Travel</h3>
+            <p class="feature-card-desc">Every agent code refactor is captured in a branched AST graph. Instantly scrub back and forth through any stage of code evolution.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-pink">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <h3 class="feature-card-title">Universal Ecosystem Connectors</h3>
+            <p class="feature-card-desc">Native bindings for GitHub, GitLab, Jira, Linear, AWS, Google Cloud, Docker, and Supabase for seamless CI/CD synchronization.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon icon-blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <h3 class="feature-card-title">Self-Healing Unit Tests</h3>
+            <p class="feature-card-desc">Whenever tests fail, diagnostic agents intercept runtime errors, analyze stack traces, and self-patch logic bugs without human intervention.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Platform Demo Section -->
+    <section class="demo-section" id="demo">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">LIVE CAPABILITIES</span>
+          <h2 class="section-title">See Swarm Intelligence In Real-Time</h2>
+          <p class="section-subtitle">Click the modes below to observe how different specialized neural engines collaborate.</p>
+        </div>
+
+        <div class="demo-card">
+          <!-- Demo Mode Tabs -->
+          <div class="demo-tabs" role="tablist">
+            <button class="demo-tab-btn active" data-tab="tab-frontend" role="tab" aria-selected="true">
+              <span>🎨 Frontend Studio</span>
+            </button>
+            <button class="demo-tab-btn" data-tab="tab-backend" role="tab" aria-selected="false">
+              <span>⚡ API & Microservices</span>
+            </button>
+            <button class="demo-tab-btn" data-tab="tab-security" role="tab" aria-selected="false">
+              <span>🛡️ Security & Audits</span>
+            </button>
+          </div>
+
+          <!-- Demo Tab Content Panels -->
+          <div class="demo-content-area">
+            <!-- Tab 1 -->
+            <div class="demo-panel active" id="tab-frontend">
+              <div class="demo-panel-grid">
+                <div class="demo-panel-info">
+                  <h3>Generative Fluid Component Architecture</h3>
+                  <p>Give AetherMind a design token prompt or Figma link. It generates responsive, accessible, zero-dependency components with dynamic state machines.</p>
+                  <ul class="demo-feature-list">
+                    <li>✓ 100% WCAG AAA Color Contrast verification</li>
+                    <li>✓ Pure CSS responsive layouts (Grid & Flexbox)</li>
+                    <li>✓ Keyboard navigation & focus-visible trap built-in</li>
+                  </ul>
+                  <button class="btn btn-secondary btn-sm copy-snippet-btn" data-target="code-fe">Copy Generated Code</button>
+                </div>
+                <div class="demo-panel-code">
+                  <pre><code id="code-fe"><span class="code-comment">&lt;!-- Auto-generated Accessible Metric Pill --&gt;</span>
+&lt;<span class="code-tag">div</span> <span class="code-attr">class</span>=<span class="code-string">"metric-card"</span> <span class="code-attr">role</span>=<span class="code-string">"status"</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"indicator pulse-emerald"</span>&gt;&lt;/<span class="code-tag">span</span>&gt;
+  &lt;<span class="code-tag">span</span> <span class="code-attr">class</span>=<span class="code-string">"value"</span>&gt;99.98% Latency SLA&lt;/<span class="code-tag">span</span>&gt;
+&lt;/<span class="code-tag">div</span>&gt;</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2 -->
+            <div class="demo-panel" id="tab-backend">
+              <div class="demo-panel-grid">
+                <div class="demo-panel-info">
+                  <h3>Resilient Distributed Event Pipelines</h3>
+                  <p>Synthesizes transactional workflows, idempotency guarantees, and auto-retry logic with Redis queues and PostgreSQL locks.</p>
+                  <ul class="demo-feature-list">
+                    <li>✓ Distributed lock acquisition with TTL safety</li>
+                    <li>✓ Dead-letter queue telemetry automatically configured</li>
+                    <li>✓ Benchmark-tested for 100k+ req/sec</li>
+                  </ul>
+                  <button class="btn btn-secondary btn-sm copy-snippet-btn" data-target="code-be">Copy Generated Code</button>
+                </div>
+                <div class="demo-panel-code">
+                  <pre><code id="code-be"><span class="code-comment">// High-throughput Idempotent Worker</span>
+<span class="code-keyword">async function</span> <span class="code-func">processOrder</span>(orderId: <span class="code-string">string</span>) {
+  <span class="code-keyword">const</span> lock = <span class="code-keyword">await</span> redis.acquireLock(<span class="code-string">`order:${orderId}`</span>, <span class="code-number">5000</span>);
+  <span class="code-keyword">if</span> (!lock) <span class="code-keyword">throw new</span> Error(<span class="code-string">'Concurrent collision prevented'</span>);
+  <span class="code-keyword">return await</span> db.orders.finalize(orderId);
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3 -->
+            <div class="demo-panel" id="tab-security">
+              <div class="demo-panel-grid">
+                <div class="demo-panel-info">
+                  <h3>Automated Threat Modeling & AST Scans</h3>
+                  <p>Audits every dependency, memory allocation, and input parsing branch for injection attacks, buffer overruns, and logic flaws.</p>
+                  <ul class="demo-feature-list">
+                    <li>✓ Zero SQL injection and XSS surface vulnerabilities</li>
+                    <li>✓ Sub-resource integrity verification on external assets</li>
+                    <li>✓ Automated CVE vulnerability remediation</li>
+                  </ul>
+                  <button class="btn btn-secondary btn-sm copy-snippet-btn" data-target="code-sec">Copy Generated Code</button>
+                </div>
+                <div class="demo-panel-code">
+                  <pre><code id="code-sec"><span class="code-comment">// Real-Time Security Sandbox Audit</span>
+<span class="code-success">✓ Input sanitization verified via DOMPurify</span>
+<span class="code-success">✓ Cryptographic hashing: SHA-256 with Salt</span>
+<span class="code-success">✓ 0 vulnerabilities detected in 1,280 dependencies</span>
+<span class="code-info">Security Grade: A+ (Enterprise Ready)</span></code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">FLEXIBLE INVESTMENT</span>
+          <h2 class="section-title">Transparent Plans Built to Scale</h2>
+          <p class="section-subtitle">Start free on our community tier, upgrade whenever you need unlimited swarm agent threads.</p>
+
+          <!-- Monthly / Yearly Billing Toggle -->
+          <div class="pricing-toggle-wrap">
+            <span class="toggle-label" id="monthlyLabel">Monthly</span>
+            <button class="toggle-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle annual discount">
+              <span class="toggle-thumb"></span>
+            </button>
+            <span class="toggle-label" id="yearlyLabel">Yearly <span class="discount-pill">Save 20%</span></span>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <div class="pricing-card">
+            <div class="plan-header">
+              <h3 class="plan-name">Starter Explorer</h3>
+              <p class="plan-tagline">Ideal for individual developers & hobby experiments.</p>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="amount" data-monthly="0" data-yearly="0">0</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li>✓ 3 Active Agent Swarms</li>
+              <li>✓ 50,000 Neural Tokens/month</li>
+              <li>✓ Community Discord Support</li>
+              <li>✓ Standard Web IDE Access</li>
+              <li class="disabled">✕ Dedicated Dedicated Tenant</li>
+            </ul>
+            <a href="#hero" class="btn btn-secondary plan-btn">Get Started Free</a>
+          </div>
+
+          <!-- Tier 2: Popular -->
+          <div class="pricing-card popular-card">
+            <div class="popular-ribbon">MOST POPULAR</div>
+            <div class="plan-header">
+              <h3 class="plan-name">Pro Engineering</h3>
+              <p class="plan-tagline">For scaling builders and agile product teams.</p>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="amount" data-monthly="29" data-yearly="23">29</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li>✓ <strong>Unlimited</strong> Agent Swarms</li>
+              <li>✓ 2,500,000 Neural Tokens/month</li>
+              <li>✓ Priority Sub-ms Inference Queue</li>
+              <li>✓ Self-Healing CI/CD Pipeline integration</li>
+              <li>✓ 24/7 Fast-Track Priority Support</li>
+            </ul>
+            <a href="#hero" class="btn btn-primary plan-btn glow-effect">Start 14-Day Free Trial</a>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="pricing-card">
+            <div class="plan-header">
+              <h3 class="plan-name">Enterprise Fleet</h3>
+              <p class="plan-tagline">Dedicated infrastructure, bespoke models, SLAs.</p>
+              <div class="plan-price">
+                <span class="currency">$</span>
+                <span class="amount" data-monthly="99" data-yearly="79">99</span>
+                <span class="period">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li>✓ Dedicated Private VPC Cluster</li>
+              <li>✓ Custom Model Fine-Tuning on your codebase</li>
+              <li>✓ 99.99% Uptime Guarantee SLA</li>
+              <li>✓ Dedicated Solutions Architect</li>
+              <li>✓ Custom Enterprise Invoicing & Audit Logs</li>
+            </ul>
+            <a href="#hero" class="btn btn-secondary plan-btn">Contact Enterprise Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials / Wall of Love Section -->
+    <section class="testimonials-section" id="testimonials">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">TESTIMONIALS</span>
+          <h2 class="section-title">Loved by Thousands of Visionary Engineers</h2>
+          <p class="section-subtitle">Read what top technical leads and developers say about switching to AetherMind.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"AetherMind cut our release cycle from 3 weeks to under 48 hours. The multi-agent consensus logic caught a critical race condition before our staging servers even booted."</p>
+            <div class="author-meta">
+              <div class="author-avatar avatar-1">SC</div>
+              <div class="author-details">
+                <strong>Sophia Chen</strong>
+                <span>Head of Engineering @ Synthetix</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card featured-testimonial">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"The leap in productivity feels like going from writing raw assembly to high-level Python. Our engineers focus on creative architectural decisions while AetherMind handles the boilerplate."</p>
+            <div class="author-meta">
+              <div class="author-avatar avatar-2">MK</div>
+              <div class="author-details">
+                <strong>Marcus Vance</strong>
+                <span>CTO @ Hyperion Data Cloud</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <p class="quote">"The UI responsiveness and clean separation of concerns in the generated frontend code is astonishing. No bloat, pure idiomatic modern CSS and TypeScript."</p>
+            <div class="author-meta">
+              <div class="author-avatar avatar-3">AL</div>
+              <div class="author-details">
+                <strong>Aria Lindqvist</strong>
+                <span>Lead Staff Architect @ Quantum Edge</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-container">
+        <div class="section-header text-center">
+          <span class="section-tag">HAVE QUESTIONS?</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Everything you need to know about getting started with AetherMind AI.</p>
+        </div>
+
+        <div class="faq-accordion" id="faqAccordion">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How does AetherMind differ from standard single-agent code assistants?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Unlike single-pass autocompletion tools, AetherMind employs synchronized multi-agent swarms. An Architect agent plans the schema, a Coder agent generates modular code, an Auditor agent reviews edge cases, and a Tester agent compiles and executes test suites before presenting the final result.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Is our proprietary codebase used to train public models?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Never. We adhere to strict zero-retention policies. Your private code and context vectors are processed strictly in ephemeral memory and discarded immediately upon session completion. Enterprise customers can run on dedicated isolated VPCs.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can I integrate AetherMind into my existing GitHub/GitLab CI pipeline?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! We provide official GitHub Actions, GitLab CI runners, and a lightweight CLI tool (`aether-cli`) that plugs into any automated workflow in less than five minutes.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Do I need to enter a credit card to start the free trial?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>No credit card is required. You get immediate access to the Starter Explorer tier with 50,000 monthly neural tokens to build and experiment completely free.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner Section -->
+    <section class="cta-banner-section">
+      <div class="container">
+        <div class="cta-banner-card">
+          <div class="cta-banner-content">
+            <h2>Ready to Elevate Your Engineering Capabilities?</h2>
+            <p>Join over 250,000 developers building faster, cleaner, and more resilient software today.</p>
+            <div class="cta-banner-buttons">
+              <a href="#pricing" class="btn btn-primary btn-lg glow-effect">Get Started Free</a>
+              <a href="#demo" class="btn btn-ghost btn-lg">Explore Documentation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Polished Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-top">
+        <div class="footer-col brand-col">
+          <a href="#hero" class="brand-logo">
+            <div class="logo-mark mini">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2" fill="url(#footerGradient)"/>
+                <polyline points="2 17 12 22 22 17"/>
+                <polyline points="2 12 12 17 22 12"/>
+                <defs>
+                  <linearGradient id="footerGradient" x1="2" y1="2" x2="22" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#8b5cf6"/>
+                    <stop offset="1" stop-color="#06b6d4"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <span class="logo-text">Aether<span class="gradient-text">Mind</span></span>
+          </a>
+          <p class="brand-tagline">Empowering developers and organizations to architect software with autonomous AI intelligence.</p>
+          <div class="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Autonomous Swarms</a></li>
+            <li><a href="#demo">Neural Canvas IDE</a></li>
+            <li><a href="#features">AST Security Engine</a></li>
+            <li><a href="#pricing">Roadmap 2026</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#demo">Documentation</a></li>
+            <li><a href="#features">API Reference</a></li>
+            <li><a href="#faq">Status & Uptime</a></li>
+            <li><a href="#testimonials">Community Forum</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col newsletter-col">
+          <h4>Stay Ahead of AI</h4>
+          <p>Get weekly deep-dives into multi-agent systems and software architecture.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <div class="input-wrap">
+              <input type="email" placeholder="developer@company.com" required aria-label="Work Email Address">
+              <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+            </div>
+            <span class="newsletter-msg" id="newsletterMsg"></span>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 AetherMind Technologies Inc. Oasis Infobyte SIP — Level 1 Task 1 Submission.</p>
+        <div class="footer-legal">
+          <a href="#hero">Privacy Policy</a>
+          <span>·</span>
+          <a href="#hero">Terms of Service</a>
+          <span>·</span>
+          <a href="#hero">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

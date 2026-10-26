@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniCalc Studio — Precision Arithmetic & Scientific Calculator</title>
+  <meta name="description" content="Modern browser-based precision calculator built with vanilla JavaScript, safe expression parsing, division-by-zero guardrails, and calculation history.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Background Glows -->
+  <div class="calc-glow glow-top"></div>
+  <div class="calc-glow glow-bottom"></div>
+
+  <!-- Header -->
+  <header class="calc-header">
+    <div class="brand">
+      <span class="brand-logo">🧮</span>
+      <div>
+        <h1 class="brand-title">OmniCalc <span class="badge">STUDIO</span></h1>
+        <p class="brand-sub">Precision Arithmetic Engine</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button class="header-btn" id="historyToggleBtn" aria-label="Toggle history log" title="View History">
+        📜 History (<span id="historyBadge">0</span>)
+      </button>
+      <button class="header-btn" id="soundToggleBtn" aria-label="Toggle sound feedback" title="Toggle Sound">
+        <span id="soundIcon">🔊</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+    <div class="calculator-container">
+      <!-- Calculator Body -->
+      <div class="calculator-chassis" id="calculatorChassis">
+        <!-- OLED Dual-Line Screen -->
+        <div class="calc-screen" aria-live="polite">
+          <div class="screen-history" id="screenHistory"></div>
+          <div class="screen-main" id="screenMain">0</div>
+          <div class="screen-status" id="screenStatus"></div>
+        </div>
+
+        <!-- Button Grid Pad (CSS Grid) -->
+        <div class="calc-grid" id="buttonGrid">
+          <!-- Row 1: Scientific / Clear -->
+          <button type="button" class="btn btn-fn" data-action="all-clear" aria-label="All Clear">AC</button>
+          <button type="button" class="btn btn-fn" data-action="backspace" aria-label="Backspace">⌫</button>
+          <button type="button" class="btn btn-fn" data-action="percent" aria-label="Percentage">%</button>
+          <button type="button" class="btn btn-operator" data-action="operator" data-op="÷" aria-label="Divide">÷</button>
+
+          <!-- Row 2: Scientific Secondary -->
+          <button type="button" class="btn btn-sci" data-action="bracket-open" aria-label="Open Bracket">(</button>
+          <button type="button" class="btn btn-sci" data-action="bracket-close" aria-label="Close Bracket">)</button>
+          <button type="button" class="btn btn-sci" data-action="sqrt" aria-label="Square Root">√</button>
+          <button type="button" class="btn btn-operator" data-action="operator" data-op="×" aria-label="Multiply">×</button>
+
+          <!-- Row 3: 7, 8, 9, Minus -->
+          <button type="button" class="btn btn-num" data-action="number" data-num="7">7</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="8">8</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="9">9</button>
+          <button type="button" class="btn btn-operator" data-action="operator" data-op="−" aria-label="Subtract">−</button>
+
+          <!-- Row 4: 4, 5, 6, Plus -->
+          <button type="button" class="btn btn-num" data-action="number" data-num="4">4</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="5">5</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="6">6</button>
+          <button type="button" class="btn btn-operator" data-action="operator" data-op="+" aria-label="Add">+</button>
+
+          <!-- Row 5: 1, 2, 3, Equals (Double row or standard) -->
+          <button type="button" class="btn btn-num" data-action="number" data-num="1">1</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="2">2</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="3">3</button>
+          <button type="button" class="btn btn-sci" data-action="square" aria-label="Square">x²</button>
+
+          <!-- Row 6: Sign, 0, Decimal, Equals -->
+          <button type="button" class="btn btn-num" data-action="negate" aria-label="Positive Negative Toggle">±</button>
+          <button type="button" class="btn btn-num" data-action="number" data-num="0">0</button>
+          <button type="button" class="btn btn-num" data-action="decimal" aria-label="Decimal Point">.</button>
+          <button type="button" class="btn btn-equals" data-action="equals" aria-label="Calculate Equals">=</button>
+        </div>
+
+        <!-- Keyboard Shortcut Hint Footer -->
+        <div class="calc-footer-hints">
+          <span>⌨️ Keyboard Supported: [0-9] [+-*/] [Enter] [Backspace] [Esc]</span>
+        </div>
+      </div>
+
+      <!-- History Side Drawer Panel -->
+      <aside class="history-drawer" id="historyDrawer" aria-hidden="true">
+        <div class="drawer-header">
+          <h3>Calculation History</h3>
+          <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close history">&times;</button>
+        </div>
+        <div class="drawer-content" id="drawerContent">
+          <div class="drawer-empty">No calculations recorded yet.</div>
+        </div>
+        <div class="drawer-footer">
+          <button class="btn btn-clear-history" id="clearAllHistoryBtn">Clear History</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <span>OmniCalc Studio · Oasis Infobyte SIP (Level 2 Task 1)</span>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

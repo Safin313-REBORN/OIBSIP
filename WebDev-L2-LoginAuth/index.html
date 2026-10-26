@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusShield — Secure Authentication & Protected Member Portal</title>
+  <meta name="description" content="Client-side authentication system with SHA-256 cryptographic password hashing, validation rules, protected dashboard routes, and session management.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Cybersecurity Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Header -->
+  <header class="auth-header">
+    <div class="container header-wrap">
+      <div class="brand">
+        <span class="brand-icon">🛡️</span>
+        <div>
+          <h1 class="brand-title">NexusShield <span class="badge">AUTH</span></h1>
+          <p class="brand-sub">Client-Side SHA-256 Cryptographic Portal</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <span class="security-chip">🔒 256-Bit Hashing Active</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <!-- VIEW 1: AUTHENTICATION PORTAL (Login & Registration) -->
+    <section class="auth-section" id="authSection">
+      <div class="auth-card">
+        <!-- Tab Navigation (Sign In vs Register) -->
+        <div class="auth-tabs" role="tablist">
+          <button class="tab-btn active" id="tabLoginBtn" role="tab" aria-selected="true">Sign In</button>
+          <button class="tab-btn" id="tabRegisterBtn" role="tab" aria-selected="false">Create Account</button>
+        </div>
+
+        <!-- Alert Banner (Unified Error & Info Messages) -->
+        <div class="auth-alert" id="authAlert" role="alert">
+          <span class="alert-icon" id="alertIcon">⚠️</span>
+          <span class="alert-msg" id="alertMsg"></span>
+        </div>
+
+        <!-- FORM 1: LOGIN FORM -->
+        <form class="auth-form" id="loginForm" autocomplete="on">
+          <div class="form-group">
+            <label for="loginUser">Username or Email Address <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="loginUser" placeholder="developer@company.com" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Password <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon">🔑</span>
+              <input type="password" id="loginPassword" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="pwd-toggle-btn" data-target="loginPassword" aria-label="Toggle password visibility">👁️</button>
+            </div>
+          </div>
+
+          <div class="form-meta-row">
+            <label class="remember-label">
+              <input type="checkbox" id="rememberMeCheckbox">
+              <span>Remember me for 30 days</span>
+            </label>
+            <button type="button" class="link-btn" id="demoAccountBtn">Fill Demo Credentials</button>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+            <span>Sign In to Account</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </form>
+
+        <!-- FORM 2: REGISTRATION FORM -->
+        <form class="auth-form" id="registerForm" style="display: none;" autocomplete="off">
+          <div class="form-group">
+            <label for="regFullName">Full Name <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon">📝</span>
+              <input type="text" id="regFullName" placeholder="Alex Morgan" required>
+            </div>
+          </div>
+
+          <div class="form-row-grid">
+            <div class="form-group">
+              <label for="regUsername">Username <span class="req">*</span></label>
+              <div class="input-wrap">
+                <span class="input-icon">@</span>
+                <input type="text" id="regUsername" placeholder="alex_dev" required autocomplete="username">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail">Email Address <span class="req">*</span></label>
+              <div class="input-wrap">
+                <span class="input-icon">📧</span>
+                <input type="email" id="regEmail" placeholder="alex@company.com" required autocomplete="email">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword">Password <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon">🔑</span>
+              <input type="password" id="regPassword" placeholder="Min. 8 chars, 1 number" required autocomplete="new-password">
+              <button type="button" class="pwd-toggle-btn" data-target="regPassword" aria-label="Toggle password visibility">👁️</button>
+            </div>
+            <!-- Password Strength Meter -->
+            <div class="pwd-strength-container">
+              <div class="strength-bar-track">
+                <div class="strength-bar-fill" id="strengthBarFill"></div>
+              </div>
+              <span class="strength-text" id="strengthText">Password Strength: Empty</span>
+            </div>
+            <ul class="pwd-rules-list">
+              <li id="ruleLength">✕ At least 8 characters</li>
+              <li id="ruleNumber">✕ Contains at least 1 number (0–9)</li>
+              <li id="ruleLetter">✕ Contains uppercase & lowercase letters</li>
+            </ul>
+          </div>
+
+          <div class="form-group">
+            <label for="regConfirmPassword">Confirm Password <span class="req">*</span></label>
+            <div class="input-wrap">
+              <span class="input-icon">🛡️</span>
+              <input type="password" id="regConfirmPassword" placeholder="Re-enter password" required autocomplete="new-password">
+              <button type="button" class="pwd-toggle-btn" data-target="regConfirmPassword" aria-label="Toggle password visibility">👁️</button>
+            </div>
+            <div class="match-error" id="matchError">Passwords do not match.</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="registerSubmitBtn">
+            <span>Create Secure Account</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </form>
+
+        <div class="auth-footer-note">
+          <small>🛡️ Passwords are cryptographically hashed using native <strong>SHA-256</strong> before local storage. Plaintext passwords never persist.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: PROTECTED DASHBOARD (Only Accessible After Valid Login) -->
+    <section class="dashboard-section" id="dashboardSection" style="display: none;">
+      <!-- Welcome Header Card -->
+      <div class="dashboard-hero-card">
+        <div class="user-greeting">
+          <div class="user-avatar" id="dashAvatar">AM</div>
+          <div>
+            <span class="session-badge">🟢 Authenticated Session Active</span>
+            <h2 class="dash-welcome">Welcome back, <span id="dashFullName">Alex Morgan</span>!</h2>
+            <p class="dash-meta">Username: <strong id="dashUsername">alex_dev</strong> · Email: <span id="dashEmail">alex@company.com</span></p>
+          </div>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-danger" id="logoutBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+            <span>Log Out</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Cards Grid -->
+      <div class="dash-grid">
+        <!-- Security & Audit Card -->
+        <div class="dash-card">
+          <span class="dash-card-tag">SECURITY DIAGNOSTICS</span>
+          <h3>Cryptographic Vault</h3>
+          <p class="dash-card-desc">Your authentication credentials are encrypted using irreversible SHA-256 digests in client localStorage.</p>
+          <div class="audit-details">
+            <div class="audit-row">
+              <span>Digest Algorithm</span>
+              <strong>SHA-256 (Web Crypto)</strong>
+            </div>
+            <div class="audit-row">
+              <span>Current Session ID</span>
+              <code id="dashSessionId">sess_9a87f2...</code>
+            </div>
+            <div class="audit-row">
+              <span>Login Timestamp</span>
+              <strong id="dashLoginTime">Just now</strong>
+            </div>
+            <div class="audit-row">
+              <span>Plaintext Leak Risk</span>
+              <span class="pill-secure">0% (Zero-Knowledge)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simulated Active Permissions Card -->
+        <div class="dash-card">
+          <span class="dash-card-tag">PRIVILEGES & ACCESS</span>
+          <h3>Authorized Workspaces</h3>
+          <p class="dash-card-desc">Authenticated roles granted to this account under the Oasis Infobyte SIP track.</p>
+          <ul class="access-list">
+            <li>✓ Frontend Web Development Sandbox</li>
+            <li>✓ Protected Route Navigation Guard</li>
+            <li>✓ Session Storage Token Persistence</li>
+            <li>✓ LocalStorage User Credential Vault</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Simulated Audit Log -->
+      <div class="dash-card mt-4">
+        <span class="dash-card-tag">ACTIVITY TRAIL</span>
+        <h3>Recent Authentication Logs</h3>
+        <div class="audit-log-table-wrap">
+          <table class="audit-table">
+            <thead>
+              <tr>
+                <th>Event</th>
+                <th>Status</th>
+                <th>Hash Digest Verified</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="auditLogBody">
+              <tr>
+                <td>User Sign-In</td>
+                <td><span class="status-ok">Success (200)</span></td>
+                <td><code>SHA-256 match</code></td>
+                <td>Today, Just Now</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <span>NexusShield Auth · Oasis Infobyte SIP (Level 2 Task 4)</span>
+      <span>Engineered with HTML5, CSS3, Vanilla JS & Native Web Crypto API</span>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
